@@ -14,9 +14,9 @@
 class Logger {
 public:
     //  Log to console
-    static void log_info(std::string text);
-    static void log_warning(std::string text);
-    static void log_error(std::string text);
+    static void info(std::string text);
+    static void warn(std::string text);
+    static void error(std::string text);
 };
 
 #endif // LOGGER_H

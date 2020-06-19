@@ -12,7 +12,8 @@
 
 int main() {
     std::cout << "Welcome to the juniper engine!\n";
-    Logger::log_info("Testing");
-    //INFO("TESTING DIRECT");
+    Logger::info("Testing");
+    Logger::warn("Testing");
+    Logger::error("Testing");
     return 0;
 }
