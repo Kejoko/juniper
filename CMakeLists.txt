@@ -14,12 +14,13 @@ List(APPEND CMAKE_MODULE_PATH
 #======================================================================
 # Preprocessor directives
 #======================================================================
-option(DEBUG "Debug mode" ON)
-if(DEBUG)
+option(DEBUG_MODE "Debug mode" ON)
+if(DEBUG_MODE)
   add_compile_definitions(DEBUG)
 else()
   add_compile_definitions(RELEASE)
-endif(DEBUG)
+endif(DEBUG_MODE)
+unset(DEBUG_MODE CACHE)
 
 #======================================================================
 # C++ 11 Support
@@ -43,11 +44,12 @@ add_subdirectory(juniper)
 #======================================================================
 # Packages and libraries
 #======================================================================
-#include("cmake/JuniperSetup.cmake")
+set(J_LIBS)
 
 #======================================================================
 # Entry Point
 #======================================================================
 add_executable(JuniperApp Entry.cpp)
 
-target_link_libraries(JuniperApp PRIVATE J_Logger)
+target_link_libraries(JuniperApp PRIVATE
+  J_Logger)
