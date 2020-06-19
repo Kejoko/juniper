@@ -1,5 +1,8 @@
 #======================================================================
-# Juniper/juniper
+# Juniper/juniper/logger
 #======================================================================
 
-add_subdirectory(logger)
+add_library(
+  J_Logger
+  logger.h
+  logger.cpp)
