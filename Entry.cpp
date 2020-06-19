@@ -8,7 +8,7 @@
 
 #include <iostream>
 
-#include "juniper/logger/logger.h"
+#include "juniper/juniper.h"
 
 int main() {
     std::cout << "Welcome to the juniper engine!\n";

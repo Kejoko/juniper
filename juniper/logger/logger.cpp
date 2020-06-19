@@ -52,7 +52,7 @@
     #endif // UNIX
 #elif RELEASE
     #define INFO(s) {}
-    #define WARNING(s) {}
+    #define WARN(s) {}
     #define ERROR(s) {}
 #endif
 
