@@ -9,21 +9,21 @@
 #include <iostream>
 #include <string>
 
-#incluede "logger.h"
+#include "logger.h"
 
 // Define colors here (dependent upon OS)
 
-#ifndef RELEASE
+#ifdef DEBUG
     #define INFO(s) { \
         std::cout << "[info]" << s << "\n"; \
     }
     #define WARNING(s) { \
         std::cout << "[warning]" << s << "\n"; \
     }
-    #define ERROR(s)  \
+    #define ERROR(s) { \
         std::cout << "[error]" << s << "\n"; \
     }
-#elif
+#elif RELEASE
     #define INFO(s) {}
     #define WARNING(s) {}
     #define ERROR(s) {}

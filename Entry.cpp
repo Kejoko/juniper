@@ -7,6 +7,7 @@
 //======================================================================
 
 #include <iostream>
+
 #include "juniper/logger/logger.h"
 
 int main() {
