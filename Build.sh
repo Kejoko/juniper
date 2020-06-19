@@ -6,18 +6,17 @@ echo "... Building Juniper application ..."
 
 # Check if make is installed
 
-# Check if bin directory exists
-if [ ! -d bin ]
+# Create bin directory
+if [ ! -d build ]
 then
-  echo "... Creating bin directory ..."
-  # Create bin directory
-  mkdir bin
+  echo "... Creating build directory ..."
+  mkdir build
 else
-  echo "... bin directory exists ..."
+  echo "... build directory exists ..."
 fi
+cd build
 
 # CMake and make to build the Juniper application
-cd bin
 {
   echo "... Running CMake ..."
   cmake ..
@@ -32,6 +31,9 @@ cd bin
   echo "... make error ..."
   exit 3
 }
+
+cd ..
+mv build/JuniperApp .
 
 echo "... Successfully built Juniper application ..."
 exit 0
