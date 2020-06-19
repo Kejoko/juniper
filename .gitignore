@@ -1,5 +1,5 @@
 # Juniper builds
-bin/*
+build/*
 JuniperApp
 
 # CMake and make
