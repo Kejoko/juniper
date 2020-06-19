@@ -7,3 +7,20 @@ Makefile
 CMakeFiles/
 CMakeCache.txt
 cmake_install.cmake
+
+# C/C++
+*.d
+*.slo
+*.lo
+*.o
+*.obj
+*.so
+*.dylib
+*.dll
+*.lai
+*.la
+*.a
+*.lib
+*.exe
+*.out
+*.app
