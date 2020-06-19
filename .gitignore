@@ -1,0 +1,9 @@
+# Juniper builds
+bin/*
+JuniperApp
+
+# CMake and make
+Makefile
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
