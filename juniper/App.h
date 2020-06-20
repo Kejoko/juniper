@@ -11,9 +11,13 @@
 
 #include <string>
 
+#include <World.h>
+
 class App {
 public:
-    App(std::string title, int fps);
+    World* world;
+    
+    App(std::string _title, int _step);
     
     void init();
     void run();
@@ -21,11 +25,11 @@ public:
     
     bool is_running() { return running; };
     std::string get_title() { return title; };
-    int get_fps() { return fps; };
+    int get_step() { return step; };
 private:
-    bool running;
+    bool running = false;
     std::string title;
-    int fps;
+    int step;
 };
 
 #endif // APP_H

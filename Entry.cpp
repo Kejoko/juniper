@@ -12,16 +12,9 @@
 #include <Juniper.h>
 
 int main() {
-    std::cout << "Welcome to the juniper engine!\n";
     
-    App game("J-Game", 120);
-    game.init();
-    
-    Logger::info(game.get_title());
-    if (game.is_running())
-        Logger::warn("Initialized");
-    else
-        Logger::warn("Not initialized");
+    App* game = new App("TITLE", 4);
+    (*game).run();
     
     return 0;
 }
