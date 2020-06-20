@@ -7,13 +7,21 @@
 //======================================================================
 
 #include <iostream>
+#include <string>
 
-#include "juniper/juniper.h"
+#include "juniper/Juniper.h"
 
 int main() {
     std::cout << "Welcome to the juniper engine!\n";
-    Logger::info("Testing");
-    Logger::warn("Testing");
-    Logger::error("Testing");
+    
+    App game("J-Game", 120);
+    game.init();
+    
+    Logger::info(game.get_title());
+    if (game.is_running())
+        Logger::warn("Initialized");
+    else
+        Logger::warn("Not initialized");
+    
     return 0;
 }

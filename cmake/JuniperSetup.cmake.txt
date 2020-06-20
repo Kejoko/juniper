@@ -1,0 +1,9 @@
+#======================================================================
+# JuniperSetup.cmake
+#======================================================================
+include_directories(
+  ${PROJECT_SOURCE_DIR}/juniper
+  ${PROJECT_SOURCE_DIR}/juniper/logging)
+
+list(APPEND J_LIBS J_App)
+list(APPEND J_LIBS J_Logger)

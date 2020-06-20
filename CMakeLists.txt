@@ -10,6 +10,7 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 List(APPEND CMAKE_MODULE_PATH
   "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+include(JuniperSetup)
 
 #======================================================================
 # Preprocessor directives
@@ -42,14 +43,11 @@ add_subdirectory(app)
 add_subdirectory(juniper)
 
 #======================================================================
-# Packages and libraries
-#======================================================================
-set(J_LIBS)
-
-#======================================================================
 # Entry Point
 #======================================================================
 add_executable(JuniperApp Entry.cpp)
 
-target_link_libraries(JuniperApp PRIVATE
-  J_Logger)
+target_link_libraries(
+  JuniperApp 
+  PRIVATE
+  ${J_LIBS})
