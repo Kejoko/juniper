@@ -40,8 +40,8 @@ endif()
 # Include directories and libraries
 #======================================================================
 include_directories(
-  ${PROJECT_SOURCE_DIR}/include
-  ${PROJECT_SOURCE_DIR}/include/logger)
+  ${PROJECT_SOURCE_DIR}/juniper
+  ${PROJECT_SOURCE_DIR}/juniper/logger)
 
 list(APPEND J_LIBS J_App)
 list(APPEND J_LIBS J_Logger)
@@ -50,7 +50,7 @@ list(APPEND J_LIBS J_Logger)
 # Subdirectories
 #======================================================================
 add_subdirectory(app)
-add_subdirectory(src)
+add_subdirectory(juniper)
 
 #======================================================================
 # Entry Point
