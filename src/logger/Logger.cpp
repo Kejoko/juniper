@@ -9,7 +9,7 @@
 #include <iostream>
 #include <string>
 
-#include "logger.h"
+#include "Logger.h"
 
 #ifdef DEBUG
 // IF WINDOWS

@@ -22,14 +22,14 @@ cd build
   cmake ..
 } || {
   echo "... CMake error ..."
-  exit 2
+  exit 1
 }
 {
   echo "... Running make ..."
   make
 } || {
   echo "... make error ..."
-  exit 3
+  exit 2
 }
 
 cd ..

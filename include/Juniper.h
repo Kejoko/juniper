@@ -1,5 +1,5 @@
 //======================================================================
-// juniper.h
+// Juniper.h
 //
 // Keegan Kochis
 // Created: 2020/6/18
@@ -9,6 +9,8 @@
 #ifndef JUNIPER_H
 #define JUNIPER_H
 
-#include "logger/logger.h"
+#include "App.h"
+
+#include "logger/Logger.h"
 
 #endif // JUNIPER_H
