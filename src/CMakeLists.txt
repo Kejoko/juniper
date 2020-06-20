@@ -5,5 +5,5 @@ add_subdirectory(logger)
 
 add_library(
   J_App
-  App.h
+  ${PROJECT_SOURCE_DIR}/include/App.h
   App.cpp)

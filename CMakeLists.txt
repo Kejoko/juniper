@@ -8,9 +8,9 @@ project(Juniper VERSION 0.1 LANGUAGES CXX)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-List(APPEND CMAKE_MODULE_PATH
-  "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
-include(JuniperSetup)
+#list(APPEND CMAKE_MODULE_PATH
+#  "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+#include(JuniperSetup.cmake)
 
 #======================================================================
 # Preprocessor directives
@@ -37,10 +37,20 @@ elseif(COMPILER_SUPPORTS_CXX0X)
 endif()
 
 #======================================================================
+# Include directories and libraries
+#======================================================================
+include_directories(
+  ${PROJECT_SOURCE_DIR}/include
+  ${PROJECT_SOURCE_DIR}/include/logger)
+
+list(APPEND J_LIBS J_App)
+list(APPEND J_LIBS J_Logger)
+
+#======================================================================
 # Subdirectories
 #======================================================================
 add_subdirectory(app)
-add_subdirectory(juniper)
+add_subdirectory(src)
 
 #======================================================================
 # Entry Point

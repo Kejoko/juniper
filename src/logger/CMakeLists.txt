@@ -4,5 +4,5 @@
 
 add_library(
   J_Logger
-  Logger.h
+  ${PROJECT_SOURCE_DIR}/include/logger/Logger.h
   Logger.cpp)

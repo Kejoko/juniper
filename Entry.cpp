@@ -9,7 +9,7 @@
 #include <iostream>
 #include <string>
 
-#include "juniper/Juniper.h"
+#include <Juniper.h>
 
 int main() {
     std::cout << "Welcome to the juniper engine!\n";
