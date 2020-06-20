@@ -19,7 +19,16 @@ void App::init() {
     running = true;
 }
 
+
+//----------------------------------------------------------------------
+// Main game loop. Run at constant time step with variable rate
+// rendering.
+//----------------------------------------------------------------------
 void App::run() {
+    
+    while(running) {
+        
+    }
     
 }
 
