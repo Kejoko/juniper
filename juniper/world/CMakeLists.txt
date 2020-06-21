@@ -1,8 +1,12 @@
 #======================================================================
-# Juniper/juniper/logger
+# Juniper/juniper/world
 #======================================================================
 
 add_library(
-  J_Logger
-  Logger.h
-  Logger.cpp)
+  J_World
+  Chunk.h
+  Level.h
+  World.h
+  Chunk.cpp
+  Level.cpp
+  World.cpp)

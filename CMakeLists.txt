@@ -41,10 +41,12 @@ endif()
 #======================================================================
 include_directories(
   ${PROJECT_SOURCE_DIR}/juniper
-  ${PROJECT_SOURCE_DIR}/juniper/logger)
+  ${PROJECT_SOURCE_DIR}/juniper/logger
+  ${PROJECT_SOURCE_DIR}/juniper/world)
 
 list(APPEND J_LIBS J_App)
 list(APPEND J_LIBS J_Logger)
+list(APPEND J_LIBS J_World)
 
 #======================================================================
 # Subdirectories
