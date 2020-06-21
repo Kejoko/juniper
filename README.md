@@ -14,5 +14,5 @@ This project is dependent upon a couple libraries.
 1. In your command line interface run the command './scripts/build-unix.sh'
 ##### Windows
 1. Clone the Juniper repository to your desired destination on your drive
-1. Double click the 'SetupWindows.bat' file in the scripts directory to run it
-1. Double click the 'BuildWindows.bat' file in the scripts directory to run it
+1. Double click the 'setup-windows.bat' file in the scripts directory to run it
+1. Double click the 'build-windows.bat' file in the scripts directory to run it

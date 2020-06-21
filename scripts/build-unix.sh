@@ -6,11 +6,11 @@ then
   exit 1
 fi
 
+# Ensure CMake is installed
+
+# Ensure make is installed
+
 echo "... Building Juniper application ..."
-
-# Check if CMake is installed
-
-# Check if make is installed
 
 # Create build directory
 if [ ! -d build ]
@@ -28,14 +28,14 @@ cd build
   cmake ..
 } || {
   echo "... CMake error ..."
-  exit 2
+  exit 4
 }
 {
   echo "... Running make ..."
   make
 } || {
   echo "... make error ..."
-  exit 3
+  exit 5
 }
 
 cd ..
