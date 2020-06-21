@@ -37,18 +37,21 @@ void App::init() {
 // The inner while loop determines how frequently the game ticks occur. These game ticks are
 // when the previous state and next state are to be updated according to the game world's
 // behavior.
+//
+// App.h has some handy typedefs which provide highres_clock, time_point, duration_ns,
+// and duration_ms. Each type is defined as something from the chrono library.
 //------------------------------------------------------------------------------------------
 void App::run() {
     init();
     
-    std::chrono::duration<signed long long, std::nano> game_time = std::chrono::duration<signed long long, std::nano>{0};
-    std::chrono::duration<signed long long, std::milli> delta_time = std::chrono::duration<signed long long, std::milli>{4};
+    duration_ns game_time = duration_ns{0};
+    duration_ms delta_time = duration_ms{4};
     
-    std::chrono::high_resolution_clock::time_point previous_tick_start = std::chrono::high_resolution_clock::now();
-    std::chrono::high_resolution_clock::time_point current_tick_start;
+    time_point previous_tick_start = highres_clock::now();
+    time_point current_tick_start;
     
-    std::chrono::duration<signed long long, std::nano> elapsed_tick_time;
-    std::chrono::duration<signed long long, std::nano> accumulator = std::chrono::duration<signed long long, std::nano>{0};
+    duration_ns elapsed_tick_time;
+    duration_ns accumulator = duration_ns{0};
     
     // Previous state
     // Current state
@@ -58,7 +61,7 @@ void App::run() {
     
     Logger::info("Starting " + title);
     while(running) {
-        current_tick_start = std::chrono::high_resolution_clock::now();
+        current_tick_start = highres_clock::now();
         elapsed_tick_time = current_tick_start - previous_tick_start;
         // If elapsed tick time was too long, lock it
         previous_tick_start = current_tick_start;

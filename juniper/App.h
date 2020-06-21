@@ -13,6 +13,11 @@
 
 #include <World.h>
 
+typedef std::chrono::high_resolution_clock highres_clock;
+typedef highres_clock::time_point time_point;
+typedef std::chrono::duration<signed long long, std::nano> duration_ns;
+typedef std::chrono::duration<signed long long, std::milli> duration_ms;
+
 class App {
 public:
     World* world;
