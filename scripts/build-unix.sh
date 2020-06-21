@@ -1,12 +1,18 @@
 #!/bin/bash
-# Build the Juniper application using CMake and make
+
+# Ensure running in linux environment
+if [[ "$OSTYPE" != "linux-gnu"* && "$OSTYPE" != "darwin"* ]]
+then
+  exit 1
+fi
+
 echo "... Building Juniper application ..."
 
 # Check if CMake is installed
 
 # Check if make is installed
 
-# Create bin directory
+# Create build directory
 if [ ! -d build ]
 then
   echo "... Creating build directory ..."
@@ -22,14 +28,14 @@ cd build
   cmake ..
 } || {
   echo "... CMake error ..."
-  exit 1
+  exit 2
 }
 {
   echo "... Running make ..."
   make
 } || {
   echo "... make error ..."
-  exit 2
+  exit 3
 }
 
 cd ..
