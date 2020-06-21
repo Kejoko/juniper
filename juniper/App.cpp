@@ -6,6 +6,7 @@
 // The class to be extended by Juniper applications
 //==========================================================================================
 
+#include <iostream>
 #include <chrono>
 #include <string>
 
@@ -13,9 +14,9 @@
 
 #include "App.h"
 
-App::App(std::string _title, int _step) {
+App::App(std::string _title, int ms_timestep) {
     title = _title;
-    step = _step;
+    delta_time = duration_ms{ms_timestep};
 }
 
 void App::init() {
@@ -43,9 +44,6 @@ void App::init() {
 //------------------------------------------------------------------------------------------
 void App::run() {
     init();
-    
-    duration_ns game_time = duration_ns{0};
-    duration_ms delta_time = duration_ms{4};
     
     time_point previous_tick_start = highres_clock::now();
     time_point current_tick_start;

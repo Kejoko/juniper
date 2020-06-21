@@ -22,7 +22,7 @@ class App {
 public:
     World* world;
     
-    App(std::string _title, int _step);
+    App(std::string _title, int ticks_per_second);
     
     void init();
     void run();
@@ -30,11 +30,12 @@ public:
     
     bool is_running() { return running; };
     std::string get_title() { return title; };
-    int get_step() { return step; };
 private:
     bool running = false;
     std::string title;
-    int step;
+    
+    duration_ns game_time = duration_ns{0};
+    duration_ms delta_time;
 };
 
 #endif // APP_H
