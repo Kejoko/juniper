@@ -6,7 +6,6 @@
 // The class to be extended by Juniper applications
 //==========================================================================================
 
-#include <iostream>
 #include <chrono>
 #include <string>
 
