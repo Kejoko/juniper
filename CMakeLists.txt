@@ -6,8 +6,6 @@ cmake_minimum_required(VERSION 3.14)
 
 project(Juniper VERSION 0.1 LANGUAGES CXX)
 
-set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING INTERNAL FORCE)
-
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 #======================================================================
