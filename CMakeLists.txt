@@ -2,15 +2,11 @@
 # Juniper
 #======================================================================
 
-cmake_minimum_required(VERSION 3.17)
+cmake_minimum_required(VERSION 3.14)
 
 project(Juniper VERSION 0.1 LANGUAGES CXX)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-
-#list(APPEND CMAKE_MODULE_PATH
-#  "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
-#include(JuniperSetup.cmake)
 
 #======================================================================
 # Preprocessor directives
