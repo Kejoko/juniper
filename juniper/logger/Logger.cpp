@@ -49,7 +49,7 @@
             std::cout << RED << "[ERROR]\t" << RESET << s << "\n"; \
         }
     #endif // UNIX
-#elif RELEASE
+#elif defined RELEASE
     #define INFO(s) {}
     #define WARN(s) {}
     #define ERROR(s) {}

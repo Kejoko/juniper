@@ -2,6 +2,10 @@
 build/*
 JuniperApp
 
+# Visual Studio
+.vs/
+out/
+
 # CMake and make
 Makefile
 CMakeFiles/
