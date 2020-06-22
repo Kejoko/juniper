@@ -17,4 +17,6 @@ A platform independent 3D physics game engine.
 1. With the Juniper folder opened, right click in the file explorer window and select ```Open in Visual studio```
   * Visual Studio will automatically run CMake to create the build environment and open the Juniper folder in the Solution Explorer
 1. Double click the CMakeLists.txt, in the top level Juniper folder, in the Solution Explorer to open it for editing
+  * To make this easier for the future, right click on the top level CMakeLists.txt in the Solution Explorer and click ```Set as Startup Item```.
+  This will allow you to build the application while the top level CMakeLists.txt isn't opened.
 1. Press the ```F5``` key to run the application
