@@ -29,16 +29,6 @@ unset(DEBUG_MODE CACHE)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-#include(CheckCXXCompilerFlag)
-#check_cxx_compiler_flag("-std=gnu++11" COMPILER_SUPPORTS_CXX11)
-#check_cxx_compiler_flag("-std=gnu++0x" COMPILER_SUPPORTS_CXX0X)
-
-#if(COMPILER_SUPPORTS_CXX11)
-#  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
-#elseif(COMPILER_SUPPORTS_CXX0X)
-#  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++0x")
-#endif()
-
 #======================================================================
 # Include directories and libraries
 #======================================================================
