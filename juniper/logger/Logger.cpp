@@ -9,10 +9,12 @@
 #include <iostream>
 #include <string>
 
+#include <Core.h>
+
 #include "Logger.h"
 
 #ifdef DEBUG
-    #ifdef _WIN32
+    #ifdef WINDOWS_BUILD
         #include <Windows.h>
         #define INFO(s) { \
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7); \
@@ -38,8 +40,8 @@
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7); \
             std::cout << "\t" << s << "\n"; \
         }
-    #endif // _WIN32
-    #if defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__)
+    #endif // WINDOWS_BUILD
+    #ifdef UNIX_BUILD
         #define RESET   "\033[0m"
         #define WHITE   "\033[97m"
         #define GREEN   "\033[92m"
@@ -58,12 +60,18 @@
         #define FATAL(s) {\
             std::cout << BACKRED << "[FATAL]" << RESET << "\t" <<  s << "\n"; \
         }
-    #endif // UNIX
+    #endif // UNIX_BUILD
 #elif defined RELEASE
     #define INFO(s) {}
     #define WARN(s) {}
     #define ERROR(s) {}
 #endif
+
+Logger logger;
+
+void Logger::init(std::string title) {
+    log_file.open(title + ".log");
+}
 
 void Logger::console(int type, std::string text) {
     switch(type) {
@@ -75,10 +83,16 @@ void Logger::console(int type, std::string text) {
 }
 
 void Logger::file(int type, std::string text) {
+    
+    
     switch(type) {
         case log_info: break;
         case log_warn: break;
         case log_error: break;
         case log_fatal: break;
     }
+}
+
+void Logger::cleanup() {
+    log_file.close();
 }

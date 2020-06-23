@@ -27,7 +27,7 @@ public:
     
     void init();
     void run();
-    void stop();
+    void cleanup();
     
     bool is_running() { return running; };
     std::string get_title() { return title; };

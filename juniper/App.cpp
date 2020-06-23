@@ -19,9 +19,10 @@ App::App(std::string _title, int ms_timestep) {
 }
 
 void App::init() {
-    Logger::console(log_info, "Initializing " + title);
+    logger.console(log_info, "Initializing " + title);
+    logger.init(title);
     running = true;
-    Logger::console(log_info, "Initialized " + title);
+    logger.console(log_info, "Initialized " + title);
 }
 
 
@@ -43,7 +44,7 @@ void App::init() {
 //------------------------------------------------------------------------------------------
 void App::run() {
     init();
-    Logger::console(log_fatal, "Testing fatalaity");
+    logger.console(log_fatal, "Testing fatalaity");
     
     time_point previous_tick_start = highres_clock::now();
     time_point current_tick_start;
@@ -57,7 +58,7 @@ void App::run() {
     
     long double alpha;
     
-    Logger::console(log_info, "Starting " + title);
+    logger.console(log_info, "Starting " + title);
     while(running) {
         current_tick_start = highres_clock::now();
         elapsed_tick_time = current_tick_start - previous_tick_start;
@@ -82,10 +83,9 @@ void App::run() {
         
         // Render current state
     }
-    
-    Logger::console(log_warn, "Stopped " + title);
 }
 
-void App::stop() {
-    
+void App::cleanup() {
+    logger.console(log_warn, "Cleaning up all resources");
+    logger.cleanup();
 }
