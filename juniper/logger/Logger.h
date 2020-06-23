@@ -18,7 +18,7 @@ class Logger {
 public:
     void init(std::string title);
     void console(int type, std::string text);
-    void file(int type, std::string text);
+    void file(int type, std::string function, std::string text);
     void cleanup();
 private:
     bool initialized;

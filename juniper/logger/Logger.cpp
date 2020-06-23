@@ -6,6 +6,7 @@
 // Logging messages
 //==========================================================================================
 
+#include <fstream>
 #include <iostream>
 #include <string>
 
@@ -18,13 +19,13 @@
         #include <Windows.h>
         #define INFO(s) { \
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7); \
-            std::cout << "[INFO]"; \
+            std::cout << "[INFO.]"; \
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7); \
             std::cout << "\t" <<  s << "\n"; \
         }
         #define WARN(s) { \
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14); \
-            std::cout << "[WARN]"; \
+            std::cout << "[WARN.]"; \
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7); \
             std::cout << "\t" <<  s << "\n"; \
         }
@@ -49,10 +50,10 @@
         #define RED     "\033[91m"
         #define BACKRED "\033[101m"
         #define INFO(s) { \
-            std::cout << "[INFO]" << RESET << "\t" <<  s << "\n"; \
+            std::cout << "[INFO.]" << RESET << "\t" <<  s << "\n"; \
         }
         #define WARN(s) { \
-            std::cout << YELLOW << "[WARN]" << RESET << "\t" <<  s << "\n"; \
+            std::cout << YELLOW << "[WARN.]" << RESET << "\t" <<  s << "\n"; \
         }
         #define ERROR(s) { \
             std::cout << RED << "[ERROR]" << RESET << "\t" <<  s << "\n"; \
@@ -82,15 +83,23 @@ void Logger::console(int type, std::string text) {
     }
 }
 
-void Logger::file(int type, std::string text) {
+void Logger::file(int type, std::string function, std::string text) {
+    // Log current time in nanoseconds resolution
+    std::string message = "";
     
-    
+    // Log level
     switch(type) {
-        case log_info: break;
-        case log_warn: break;
-        case log_error: break;
-        case log_fatal: break;
+        case log_info: message += "\tinfo.\t"; break;
+        case log_warn: message += "\twarn\t"; break;
+        case log_error: message += "\terror\t"; break;
+        case log_fatal: message += "\tfatal\t"; break;
     }
+    
+    // Log calling function
+    
+    // Log the message
+    
+    // Write
 }
 
 void Logger::cleanup() {

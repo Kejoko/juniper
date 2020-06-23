@@ -9,6 +9,7 @@
 #include <chrono>
 #include <string>
 
+#include <Core.h>
 #include <Logger.h>
 
 #include "App.h"
