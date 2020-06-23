@@ -43,6 +43,7 @@ void App::init() {
 //------------------------------------------------------------------------------------------
 void App::run() {
     init();
+    Logger::console(log_fatal, "Testing fatalaity");
     
     time_point previous_tick_start = highres_clock::now();
     time_point current_tick_start;
