@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Ensure running in linux environment
+# Ensure running in unix environment
 if [[ "$OSTYPE" != "linux-gnu"* && "$OSTYPE" != "darwin"* ]]
 then
   exit 1
