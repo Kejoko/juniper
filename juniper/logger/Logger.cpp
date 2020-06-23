@@ -55,14 +55,11 @@
     #define ERROR(s) {}
 #endif
 
-void Logger::info(std::string text) {
-    INFO(text);
-}
-
-void Logger::warn(std::string text) {
-    WARN(text);
-}
-
-void Logger::error(std::string text) {
-    ERROR(text);
+void Logger::console(int type, std::string text) {
+    switch(type) {
+        case log_info: INFO(text); break;
+        case log_warn: WARN(text); break;
+        case log_error: ERROR(text); break;
+//        case log_fatal: FATAL(text); break;
+    }
 }

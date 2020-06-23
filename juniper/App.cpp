@@ -19,9 +19,9 @@ App::App(std::string _title, int ms_timestep) {
 }
 
 void App::init() {
-    Logger::info("Initializing " + title);
+    Logger::console(log_info, "Initializing " + title);
     running = true;
-    Logger::info("Initialized " + title);
+    Logger::console(log_info, "Initialized " + title);
 }
 
 
@@ -56,7 +56,7 @@ void App::run() {
     
     long double alpha;
     
-    Logger::info("Starting " + title);
+    Logger::console(log_info, "Starting " + title);
     while(running) {
         current_tick_start = highres_clock::now();
         elapsed_tick_time = current_tick_start - previous_tick_start;
@@ -82,7 +82,7 @@ void App::run() {
         // Render current state
     }
     
-    Logger::warn("Stopped " + title);
+    Logger::console(log_warn, "Stopped " + title);
 }
 
 void App::stop() {

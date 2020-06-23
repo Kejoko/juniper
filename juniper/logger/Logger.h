@@ -11,11 +11,12 @@
 
 #include <string>
 
+enum log_type { log_info, log_warn, log_error, log_fatal };
+
 class Logger {
 public:
-    static void info(std::string text);
-    static void warn(std::string text);
-    static void error(std::string text);
+    static void console(int type, std::string text);
+//    static void file(int type, std::string text);
 };
 
 #endif // LOGGER_H
