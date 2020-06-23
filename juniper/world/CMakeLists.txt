@@ -10,3 +10,8 @@ add_library(
   Chunk.cpp
   Level.cpp
   World.cpp)
+
+set_target_properties(
+  J_World
+  PROPERTIES
+  FOLER {PROJECT_NAME}/libs)

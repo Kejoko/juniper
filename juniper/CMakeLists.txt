@@ -8,3 +8,8 @@ add_library(
   J_App
   App.h
   App.cpp)
+
+set_target_properties(
+  J_App
+  PROPERTIES
+  FOLER {PROJECT_NAME}/libs)
