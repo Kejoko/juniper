@@ -71,7 +71,7 @@
 Logger logger;
 
 void Logger::init(std::string title) {
-    log_file.open(title + ".log");
+    log_file.open(title + "log.txt");
     // Initialize messages to be character arrays with a fixed number of characters.
     running = true;
 }

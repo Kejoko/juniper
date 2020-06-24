@@ -39,7 +39,8 @@ private:
     duration_ns game_time = duration_ns{0};
     duration_ms delta_time;
     
-    std::thread log_thread;
 };
+
+extern std::thread log_thread;
 
 #endif // APP_H

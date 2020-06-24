@@ -15,6 +15,8 @@
 
 #include "App.h"
 
+std::thread log_thread;
+
 App::App(std::string _title, int ms_timestep) {
     title = _title;
     delta_time = duration_ms{ms_timestep};
@@ -63,7 +65,7 @@ void App::run() {
     
     logger.console(log_info, "Starting " + title);
     int count = 0;
-    while(running && count < 10000) {
+    while(running && count < 1000000000) {
         current_tick_start = highres_clock::now();
         elapsed_tick_time = current_tick_start - previous_tick_start;
         // If elapsed tick time was too long, lock it
@@ -87,6 +89,8 @@ void App::run() {
         // current state  =  next_state * alpha  +  prev_state * (1 - alpha)
         
         // Render current state
+        
+        count++;
     }
     
     cleanup();
@@ -95,6 +99,5 @@ void App::run() {
 void App::cleanup() {
     logger.console(log_warn, "Cleaning up all resources");
     logger.cleanup();
-    log_thread.join();
     logger.console(log_info, "successful cleanup");
 }

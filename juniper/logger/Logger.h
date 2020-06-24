@@ -10,6 +10,7 @@
 #define LOGGER_H
 
 #include <fstream>
+#include <mutex>
 #include <string>
 #include <thread>
 
@@ -34,6 +35,5 @@ private:
 };
 
 extern Logger logger;
-extern std::thread logger_thread;
 
 #endif // LOGGER_H
