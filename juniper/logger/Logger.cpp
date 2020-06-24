@@ -72,6 +72,8 @@ Logger logger;
 
 void Logger::init(std::string title) {
     log_file.open(title + ".log");
+    // Initialize messages to be character arrays with a fixed number of characters.
+    running = true;
 }
 
 void Logger::console(int type, std::string text) {
@@ -83,25 +85,58 @@ void Logger::console(int type, std::string text) {
     }
 }
 
-void Logger::file(int type, std::string function, std::string text) {
-    // Log current time in nanoseconds resolution
-    std::string message = "";
+//------------------------------------------------------------------------------------------
+// This is the method utilized in the main thread to produce a message for the log file.
+// The message will be added to the bounded buffer, messages, before it is written to the
+// file by Logger::consumeMessage, running in a seperate thread.
+//
+// The message is added to the buffer at first+count, then count is incremented to indicate
+// another message has been added to the buffer.
+//
+// Currently, it is assumed that there will always be room in the buffer to add a message.
+// We are currently not handling the case where the buffer is full. In the case that the
+// buffer is full, the oldest message will be overwritten.
+//------------------------------------------------------------------------------------------
+void Logger::produceMessage(int type, std::string function, std::string text) {
+    std::string msg = "YYYY-MM-DD HH:MM:SS.999999999"; // Get current time nanoseconds res
     
-    // Log level
     switch(type) {
-        case log_info: message += "\tinfo.\t"; break;
-        case log_warn: message += "\twarn\t"; break;
-        case log_error: message += "\terror\t"; break;
-        case log_fatal: message += "\tfatal\t"; break;
+        case log_info: msg += "\tinfo.\t"; break;
+        case log_warn: msg += "\twarn\t"; break;
+        case log_error: msg += "\terror\t"; break;
+        case log_fatal: msg += "\tfatal\t"; break;
     }
     
-    // Log calling function
+    msg += function;
+    #ifdef WINDOWS_BUILD
+    msg += "\r";
+    #endif
+    msg += "\n\t\t" + text;
     
-    // Log the message
-    
-    // Write
+    messages[first + count] = msg;
+    count = (count + 1) % 20;
+}
+
+//------------------------------------------------------------------------------------------
+// This method is responsible for taking a message from the messages buffer and writing it
+// to the log file. The messages are produced in the main thread and this function is run in
+// a different thread. The messages are being added to the buffer at inIndex by the
+// Logger::produceMessage method in a seperate thread.
+//
+// The messages are being removed from the buffer at outIndex and written to the member
+// file, log_file, which was initialized in Logger::init.
+//------------------------------------------------------------------------------------------
+void Logger::consumeMessages() {
+    while(running) {
+        if (count > 0) {
+            log_file << messages[first];
+            first++;
+            count--;
+        }
+    }
 }
 
 void Logger::cleanup() {
+    running = false;
     log_file.close();
 }

@@ -8,6 +8,7 @@
 
 #include <chrono>
 #include <string>
+#include <thread>
 
 #include <Core.h>
 #include <Logger.h>
@@ -23,6 +24,7 @@ void App::init() {
     logger.console(log_info, "Initializing " + title);
     logger.init(title);
     running = true;
+    log_thread = std::thread(&Logger::consumeMessages, &logger);
     logger.console(log_info, "Initialized " + title);
 }
 
@@ -45,7 +47,7 @@ void App::init() {
 //------------------------------------------------------------------------------------------
 void App::run() {
     init();
-    logger.console(log_fatal, "Testing fatalaity");
+    logger.console(log_fatal, "Testing fatalaity message");
     
     time_point previous_tick_start = highres_clock::now();
     time_point current_tick_start;
@@ -53,14 +55,15 @@ void App::run() {
     duration_ns elapsed_tick_time;
     duration_ns accumulator = duration_ns{0};
     
-    // Previous state
-    // Current state
-    // Next state
+    // Previous state declaration
+    // Current state declaration
+    // Next state declaration
     
     long double alpha;
     
     logger.console(log_info, "Starting " + title);
-    while(running) {
+    int count = 0;
+    while(running && count < 10000) {
         current_tick_start = highres_clock::now();
         elapsed_tick_time = current_tick_start - previous_tick_start;
         // If elapsed tick time was too long, lock it
@@ -75,18 +78,23 @@ void App::run() {
             // Determine next state (physics and game world behavior, etc...)
             game_time += delta_time;
             accumulator -= delta_time;
+            logger.produceMessage(log_info, FUNC_STRING, std::to_string(count));
         }
         
-        alpha = (accumulator.count() / delta_time.count()) / 1000000.0;
+        alpha = (accumulator.count() / delta_time.count()) / + 1000000.0;
         
         // Update current state by interpolating between previous and next state
         // current state  =  next_state * alpha  +  prev_state * (1 - alpha)
         
         // Render current state
     }
+    
+    cleanup();
 }
 
 void App::cleanup() {
     logger.console(log_warn, "Cleaning up all resources");
     logger.cleanup();
+    log_thread.join();
+    logger.console(log_info, "successful cleanup");
 }
