@@ -72,8 +72,7 @@ Logger logger;
 
 void Logger::init(std::string title) {
     log_file.open(title + "log.txt");
-    // Initialize messages to be character arrays with a fixed number of characters.
-    running = true;
+    // Create fifo queue here
 }
 
 void Logger::console(int type, std::string text) {
@@ -112,9 +111,12 @@ void Logger::produceMessage(int type, std::string function, std::string text) {
     msg += "\r";
     #endif
     msg += "\n\t\t" + text;
+    #ifdef WINDOWS_BUILD
+    msg += "\r";
+    #endif
+    msg += "\n";
     
-    messages[first + count] = msg;
-    count = (count + 1) % 20;
+    
 }
 
 //------------------------------------------------------------------------------------------
@@ -126,14 +128,8 @@ void Logger::produceMessage(int type, std::string function, std::string text) {
 // The messages are being removed from the buffer at outIndex and written to the member
 // file, log_file, which was initialized in Logger::init.
 //------------------------------------------------------------------------------------------
-void Logger::consumeMessages() {
-    while(running) {
-        if (count > 0) {
-            log_file << messages[first];
-            first++;
-            count--;
-        }
-    }
+void Logger::consumeMessage() {
+    
 }
 
 void Logger::cleanup() {

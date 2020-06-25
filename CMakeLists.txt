@@ -26,7 +26,13 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 #======================================================================
-# Include directories and libraries
+# Include Juniper dependencies directories and libraries
+#======================================================================
+include_directories(
+  ${PROJECT_SOURCE_DIR}/dependencies/moodycamel)
+
+#======================================================================
+# Include Juniper directories and libraries
 #======================================================================
 include_directories(
   ${PROJECT_SOURCE_DIR}/juniper
@@ -49,6 +55,6 @@ add_subdirectory(juniper)
 add_executable(JuniperApp Entry.cpp)
 
 target_link_libraries(
-  JuniperApp 
+  JuniperApp
   PRIVATE
   ${J_LIBS})

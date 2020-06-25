@@ -13,7 +13,7 @@
 
 int main() {
     
-    App* game = new App("TITLE", 4);
+    App* game = new App("Title", 4);
     (*game).run();
     
     return 0;

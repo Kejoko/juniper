@@ -26,7 +26,7 @@ void App::init() {
     logger.console(log_info, "Initializing " + title);
     logger.init(title);
     running = true;
-    log_thread = std::thread(&Logger::consumeMessages, &logger);
+    log_thread = std::thread(&Logger::consumeMessage, &logger);
     logger.console(log_info, "Initialized " + title);
 }
 

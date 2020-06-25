@@ -10,9 +10,7 @@
 #define LOGGER_H
 
 #include <fstream>
-#include <mutex>
 #include <string>
-#include <thread>
 
 #include <Core.h>
 
@@ -23,15 +21,11 @@ public:
     void init(std::string title);
     void console(int type, std::string text);
     void produceMessage(int type, std::string function, std::string text);
-    void consumeMessages();
+    void consumeMessage();
     void cleanup();
 private:
-    bool initialized;
-    bool running;
+    bool running = false;
     std::ofstream log_file;
-    std::string messages[20];
-    int first = 0;
-    int count = 0;
 };
 
 extern Logger logger;
