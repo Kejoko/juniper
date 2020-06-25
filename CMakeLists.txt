@@ -29,7 +29,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Include Juniper dependencies directories and libraries
 #======================================================================
 include_directories(
-  ${PROJECT_SOURCE_DIR}/dependencies/moodycamel)
+  ${PROJECT_SOURCE_DIR}/dependencies)
 
 #======================================================================
 # Include Juniper directories and libraries
@@ -47,6 +47,7 @@ list(APPEND J_LIBS J_World)
 # Subdirectories
 #======================================================================
 add_subdirectory(app)
+add_subdirectory(dependencies)
 add_subdirectory(juniper)
 
 #======================================================================

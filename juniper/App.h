@@ -41,6 +41,4 @@ private:
     
 };
 
-extern std::thread log_thread;
-
 #endif // APP_H

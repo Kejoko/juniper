@@ -1,33 +1,43 @@
 //==========================================================================================
-// logger.h
+// Logger.h
 //
 // Keegan Kochis
 // Created: 2020/6/18
-// Logging messages
+// Logging messages using spdlog
 //==========================================================================================
 
 #ifndef LOGGER_H
 #define LOGGER_H
 
-#include <fstream>
+#include <memory>
 #include <string>
+
+#include <spdlog/sinks/basic_file_sink.h>
 
 #include <Core.h>
 
-enum log_type { log_info, log_warn, log_error, log_fatal };
-
 class Logger {
 public:
-    void init(std::string title);
-    void console(int type, std::string text);
-    void produceMessage(int type, std::string function, std::string text);
-    void consumeMessage();
-    void cleanup();
+    static void init();
+    static void c_info(std::string text);
+    static void c_warn(std::string text);
+    static void c_error(std::string text);
+    static void c_crit(std::string text);
+    
+    
 private:
-    bool running = false;
-    std::ofstream log_file;
+    static std::shared_ptr<spdlog::sinks::basic_file_sink_mt> juniper_logger;
+    static std::shared_ptr<spdlog::sinks::basic_file_sink_mt> app_logger;
 };
 
-extern Logger logger;
+#define JUNIPER_INFO(...)
+#define JUNIPER_WARN(...)
+#define JUNIPER_ERROR(...)
+#define JUNIPER_CRITICAL(...)
+
+#define APP_INFO(...)
+#define APP_WARN(...)
+#define APP_ERROR(...)
+#define APP_CRITICAL(...)
 
 #endif // LOGGER_H

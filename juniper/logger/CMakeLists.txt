@@ -7,6 +7,11 @@ add_library(
   Logger.h
   Logger.cpp)
 
+target_link_libraries(
+  J_Logger
+  INTERFACE
+  SpdLog)
+
 set_target_properties(
   J_Logger
   PROPERTIES

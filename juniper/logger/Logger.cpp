@@ -1,13 +1,13 @@
 //==========================================================================================
-// logger.cpp
+// Logger.cpp
 //
 // Keegan Kochis
 // Created: 2020/6/18
-// Logging messages
+// Logging messages using spdlog
 //==========================================================================================
 
-#include <fstream>
 #include <iostream>
+#include <memory>
 #include <string>
 
 #include <Core.h>
@@ -35,9 +35,9 @@
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7); \
             std::cout << "\t" <<  s << "\n"; \
         }
-        #define FATAL(s) { \
+        #define CRIT(s) { \
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12); \
-            std::cout << "[FATAL]"; \
+            std::cout << "[CRIT.]"; \
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7); \
             std::cout << "\t" << s << "\n"; \
         }
@@ -58,81 +58,25 @@
         #define ERROR(s) { \
             std::cout << RED << "[ERROR]" << RESET << "\t" <<  s << "\n"; \
         }
-        #define FATAL(s) {\
-            std::cout << BACKRED << "[FATAL]" << RESET << "\t" <<  s << "\n"; \
+        #define CRIT(s) {\
+            std::cout << BACKRED << "[CRIT.]" << RESET << "\t" <<  s << "\n"; \
         }
     #endif // UNIX_BUILD
 #elif defined RELEASE
     #define INFO(s) {}
     #define WARN(s) {}
     #define ERROR(s) {}
+    #define CRIT(s) {}
 #endif
 
-Logger logger;
+std::shared_ptr<spdlog::sinks::basic_file_sink_mt> Logger::juniper_logger;
+std::shared_ptr<spdlog::sinks::basic_file_sink_mt> Logger::app_logger;
 
-void Logger::init(std::string title) {
-    log_file.open(title + "log.txt");
-    // Create fifo queue here
-}
-
-void Logger::console(int type, std::string text) {
-    switch(type) {
-        case log_info: INFO(text); break;
-        case log_warn: WARN(text); break;
-        case log_error: ERROR(text); break;
-        case log_fatal: FATAL(text); break;
-    }
-}
-
-//------------------------------------------------------------------------------------------
-// This is the method utilized in the main thread to produce a message for the log file.
-// The message will be added to the bounded buffer, messages, before it is written to the
-// file by Logger::consumeMessage, running in a seperate thread.
-//
-// The message is added to the buffer at first+count, then count is incremented to indicate
-// another message has been added to the buffer.
-//
-// Currently, it is assumed that there will always be room in the buffer to add a message.
-// We are currently not handling the case where the buffer is full. In the case that the
-// buffer is full, the oldest message will be overwritten.
-//------------------------------------------------------------------------------------------
-void Logger::produceMessage(int type, std::string function, std::string text) {
-    std::string msg = "YYYY-MM-DD HH:MM:SS.999999999"; // Get current time nanoseconds res
-    
-    switch(type) {
-        case log_info: msg += "\tinfo.\t"; break;
-        case log_warn: msg += "\twarn\t"; break;
-        case log_error: msg += "\terror\t"; break;
-        case log_fatal: msg += "\tfatal\t"; break;
-    }
-    
-    msg += function;
-    #ifdef WINDOWS_BUILD
-    msg += "\r";
-    #endif
-    msg += "\n\t\t" + text;
-    #ifdef WINDOWS_BUILD
-    msg += "\r";
-    #endif
-    msg += "\n";
-    
+void Logger::init() {
     
 }
 
-//------------------------------------------------------------------------------------------
-// This method is responsible for taking a message from the messages buffer and writing it
-// to the log file. The messages are produced in the main thread and this function is run in
-// a different thread. The messages are being added to the buffer at inIndex by the
-// Logger::produceMessage method in a seperate thread.
-//
-// The messages are being removed from the buffer at outIndex and written to the member
-// file, log_file, which was initialized in Logger::init.
-//------------------------------------------------------------------------------------------
-void Logger::consumeMessage() {
-    
-}
-
-void Logger::cleanup() {
-    running = false;
-    log_file.close();
-}
+void Logger::c_info(std::string text) { INFO(text); }
+void Logger::c_warn(std::string text) { WARN(text); }
+void Logger::c_error(std::string text) { ERROR(text); }
+void Logger::c_crit(std::string text) { CRIT(text); }

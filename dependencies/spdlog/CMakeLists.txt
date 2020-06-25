@@ -1,7 +1,7 @@
 #======================================================================
-# Juniper/dependencies/moodycamel
+# Juniper/dependencies/spdlog
 #======================================================================
 
 add_library(
-  MoodyCamel
+  SpdLog
   INTERFACE)

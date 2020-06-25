@@ -23,11 +23,7 @@ App::App(std::string _title, int ms_timestep) {
 }
 
 void App::init() {
-    logger.console(log_info, "Initializing " + title);
-    logger.init(title);
     running = true;
-    log_thread = std::thread(&Logger::consumeMessage, &logger);
-    logger.console(log_info, "Initialized " + title);
 }
 
 
@@ -49,7 +45,6 @@ void App::init() {
 //------------------------------------------------------------------------------------------
 void App::run() {
     init();
-    logger.console(log_fatal, "Testing fatalaity message");
     
     time_point previous_tick_start = highres_clock::now();
     time_point current_tick_start;
@@ -63,12 +58,11 @@ void App::run() {
     
     long double alpha;
     
-    logger.console(log_info, "Starting " + title);
     int count = 0;
     while(running && count < 1000000000) {
         current_tick_start = highres_clock::now();
         elapsed_tick_time = current_tick_start - previous_tick_start;
-        // If elapsed tick time was too long, lock it
+        // Clamp tick time if too long
         previous_tick_start = current_tick_start;
         
         accumulator += elapsed_tick_time;
@@ -80,7 +74,6 @@ void App::run() {
             // Determine next state (physics and game world behavior, etc...)
             game_time += delta_time;
             accumulator -= delta_time;
-            logger.produceMessage(log_info, FUNC_STRING, std::to_string(count));
         }
         
         alpha = (accumulator.count() / delta_time.count()) / + 1000000.0;
@@ -97,7 +90,5 @@ void App::run() {
 }
 
 void App::cleanup() {
-    logger.console(log_warn, "Cleaning up all resources");
-    logger.cleanup();
-    logger.console(log_info, "successful cleanup");
+    
 }
