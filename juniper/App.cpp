@@ -23,6 +23,7 @@ App::App(std::string _title, int ms_timestep) {
 }
 
 void App::init() {
+    Logger::init("application-game");
     running = true;
 }
 
@@ -74,6 +75,8 @@ void App::run() {
             // Determine next state (physics and game world behavior, etc...)
             game_time += delta_time;
             accumulator -= delta_time;
+            JUNIPER_INFO("Testing logging " + std::to_string(count));
+            APP_INFO("Testing logging " + std::to_string(count));
         }
         
         alpha = (accumulator.count() / delta_time.count()) / + 1000000.0;

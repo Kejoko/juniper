@@ -9,74 +9,49 @@
 #include <iostream>
 #include <memory>
 #include <string>
+#include <vector>
+
+#include <spdlog/spdlog.h>
+#include <spdlog/sinks/basic_file_sink.h>
+#include <spdlog/sinks/stdout_color_sinks.h>
 
 #include <Core.h>
 
 #include "Logger.h"
 
-#ifdef DEBUG
-    #ifdef WINDOWS_BUILD
-        #include <Windows.h>
-        #define INFO(s) { \
-            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7); \
-            std::cout << "[INFO.]"; \
-            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7); \
-            std::cout << "\t" <<  s << "\n"; \
-        }
-        #define WARN(s) { \
-            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14); \
-            std::cout << "[WARN.]"; \
-            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7); \
-            std::cout << "\t" <<  s << "\n"; \
-        }
-        #define ERROR(s) { \
-            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12); \
-            std::cout << "[ERROR]"; \
-            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7); \
-            std::cout << "\t" <<  s << "\n"; \
-        }
-        #define CRIT(s) { \
-            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12); \
-            std::cout << "[CRIT.]"; \
-            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7); \
-            std::cout << "\t" << s << "\n"; \
-        }
-    #endif // WINDOWS_BUILD
-    #ifdef UNIX_BUILD
-        #define RESET   "\033[0m"
-        #define WHITE   "\033[97m"
-        #define GREEN   "\033[92m"
-        #define YELLOW  "\033[93m"
-        #define RED     "\033[91m"
-        #define BACKRED "\033[101m"
-        #define INFO(s) { \
-            std::cout << "[INFO.]" << RESET << "\t" <<  s << "\n"; \
-        }
-        #define WARN(s) { \
-            std::cout << YELLOW << "[WARN.]" << RESET << "\t" <<  s << "\n"; \
-        }
-        #define ERROR(s) { \
-            std::cout << RED << "[ERROR]" << RESET << "\t" <<  s << "\n"; \
-        }
-        #define CRIT(s) {\
-            std::cout << BACKRED << "[CRIT.]" << RESET << "\t" <<  s << "\n"; \
-        }
-    #endif // UNIX_BUILD
-#elif defined RELEASE
-    #define INFO(s) {}
-    #define WARN(s) {}
-    #define ERROR(s) {}
-    #define CRIT(s) {}
-#endif
+std::shared_ptr<spdlog::logger> Logger::juniper_logger;
+std::shared_ptr<spdlog::logger> Logger::app_logger;
 
-std::shared_ptr<spdlog::sinks::basic_file_sink_mt> Logger::juniper_logger;
-std::shared_ptr<spdlog::sinks::basic_file_sink_mt> Logger::app_logger;
-
-void Logger::init() {
+void Logger::init(std::string title) {
+    spdlog::sink_ptr j_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
+    juniper_logger = std::make_shared<spdlog::logger>("Juniper", j_sink);
+//    spdlog::register_logger(juniper_logger);
     
-}
+    spdlog::sink_ptr a_sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>(title + "-log.txt", true);
+    app_logger = std::make_shared<spdlog::logger>("Application", a_sink);
+//    spdlog::register_logger(app_logger);
+    
+    
+    
+//    std::vector<spdlog::sink_ptr> sinks;
+//    sinks.emplace_back(std::make_shared<spdlog::sinks::stdout_color_sink_mt>());
+//    sinks.emplace_back(std::make_shared<spdlog::sinks::stdout_color_sink_mt>(title + "-log.txt", true));
+//
+//    juniper_logger = std::make_shared<spdlog::logger>("Juniper", begin(sinks), end(sinks));
+//    spdlog::register_logger(juniper_logger);
+//    app_logger = std::make_shared<spdlog::logger>("Application", begin(sinks), end(sinks));
+//    spdlog::register_logger(app_logger);
 
-void Logger::c_info(std::string text) { INFO(text); }
-void Logger::c_warn(std::string text) { WARN(text); }
-void Logger::c_error(std::string text) { ERROR(text); }
-void Logger::c_crit(std::string text) { CRIT(text); }
+    
+    
+    
+//    auto j_sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>("juniper-log.txt");
+//    juniper_file_logger = j_sink;
+//    spdlog::register_logger(juniper_file_logger);
+    
+//    auto console_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
+//    juniper_console_logger = console_sink;
+//
+//    auto app_sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>(title + "-log.txt");
+//    app_file_logger = app_sink;
+}
