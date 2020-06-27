@@ -73,7 +73,6 @@ void App::run() {
             // Determine next state (physics and game world behavior, etc...)
             game_time += delta_time;
             accumulator -= delta_time;
-            JUNIPER_INFO("Information");
         }
         
         alpha = (accumulator.count() / delta_time.count()) / + 1000000.0;
