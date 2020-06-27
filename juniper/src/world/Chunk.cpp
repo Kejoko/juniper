@@ -9,8 +9,12 @@
 
 #include "Chunk.h"
 
-Chunk::Chunk(int _id, int _x, int _y) {
-    id = _id;
-    _x = x;
-    _y = y;
+namespace Juniper {
+
+    Chunk::Chunk(int _id, int _x, int _y) {
+        id = _id;
+        _x = x;
+        _y = y;
+    }
+
 }

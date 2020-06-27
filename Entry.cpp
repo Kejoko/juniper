@@ -13,12 +13,12 @@
 
 int main() {
     std::string title = "Demo";
-    Logger::init(title);
+    Juniper::Logger::init(title);
     
-    App* game = new App(title, 4);
+    Juniper::App* game = new Juniper::App(title, 4);
     (*game).run();
     
-    Logger::cleanup();
+    Juniper::Logger::cleanup();
     
     return 0;
 }

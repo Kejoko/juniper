@@ -16,15 +16,19 @@
 
 #include <Chunk.h>
 
-class Level {
-public:
-    Level(std::string _name);
-    
-    std::vector<Chunk> chunks;
-    
-    std::string get_name() { return name; };
-private:
-    std::string name;
-};
+namespace Juniper {
+
+    class Level {
+    public:
+        Level(std::string _name);
+        
+        std::vector<Chunk> chunks;
+        
+        std::string get_name() { return name; };
+    private:
+        std::string name;
+    };
+
+}
 
 #endif // LEVEL_H

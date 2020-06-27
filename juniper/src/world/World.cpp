@@ -11,6 +11,10 @@
 
 #include "World.h"
 
-World::World(std::string _name) {
-    name = _name;
+namespace Juniper {
+
+    World::World(std::string _name) {
+        name = _name;
+    }
+
 }
