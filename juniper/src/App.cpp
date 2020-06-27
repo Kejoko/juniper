@@ -75,7 +75,7 @@ void App::run() {
             game_time += delta_time;
             accumulator -= delta_time;
             JUNIPER_INFO("Testing logging " + std::to_string(count));
-            APP_INFO("Testing logging " + std::to_string(count));
+            //APP_INFO("Testing logging " + std::to_string(count));
         }
         
         alpha = (accumulator.count() / delta_time.count()) / + 1000000.0;

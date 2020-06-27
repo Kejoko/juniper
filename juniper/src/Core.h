@@ -9,6 +9,9 @@
 #ifndef CORE_H
 #define CORE_H
 
+//------------------------------------------------------------------------------------------
+// Platform specific macros
+//------------------------------------------------------------------------------------------
 #ifdef _WIN32
 #define WINDOWS_BUILD
 #define FUNC_STRING __FUNCSIG__
@@ -26,5 +29,16 @@
 #define UNIX_BUILD
 #define FUNC_STRING __PRETTY_FUNCTION__
 #endif
+
+//------------------------------------------------------------------------------------------
+// Spdlog macros
+//------------------------------------------------------------------------------------------
+#ifdef DEBUG
+#define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_TRACE
+#endif // DEBUG
+#ifdef RELEASE
+#define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_INFO
+#endif // RELEASE
+
 
 #endif // CORE_H
