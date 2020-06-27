@@ -21,6 +21,7 @@
 class Logger {
 public:
     static void init(std::string title);
+    static void cleanup();
     
     static std::shared_ptr<spdlog::logger>& get_juniper_logger() { return juniper_logger; }
     static std::shared_ptr<spdlog::logger>& get_app_logger() { return app_logger; }

@@ -23,7 +23,6 @@ App::App(std::string _title, int ms_timestep) {
 }
 
 void App::init() {
-    Logger::init("application-game");
     running = true;
 }
 
@@ -60,7 +59,7 @@ void App::run() {
     long double alpha;
     
     int count = 0;
-    while(running && count < 1000000000) {
+    while(running && count < 1000000) {
         current_tick_start = highres_clock::now();
         elapsed_tick_time = current_tick_start - previous_tick_start;
         // Clamp tick time if too long
