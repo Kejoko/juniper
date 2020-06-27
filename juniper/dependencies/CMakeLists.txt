@@ -1,12 +1,4 @@
 #======================================================================
-# Juniper/juniper/world
+# Juniper/dependencies
 #======================================================================
-
-add_library(
-  J_World
-  Chunk.h
-  Level.h
-  World.h
-  Chunk.cpp
-  Level.cpp
-  World.cpp)
+add_subdirectory(spdlog)

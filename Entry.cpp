@@ -12,9 +12,13 @@
 #include <Juniper.h>
 
 int main() {
+    std::string title = "Demo";
+    Logger::init(title);
     
-    App* game = new App("TITLE", 4);
+    App* game = new App(title, 4);
     (*game).run();
+    
+    Logger::cleanup();
     
     return 0;
 }

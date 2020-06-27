@@ -1,8 +1,7 @@
 #======================================================================
-# Juniper/juniper/logger
+# Juniper/dependencies/spdlog
 #======================================================================
 
 add_library(
-  J_Logger
-  Logger.h
-  Logger.cpp)
+  SpdLog
+  INTERFACE)

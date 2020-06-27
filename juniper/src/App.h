@@ -11,6 +11,7 @@
 
 #include <chrono>
 #include <string>
+#include <thread>
 
 #include <World.h>
 
@@ -27,7 +28,7 @@ public:
     
     void init();
     void run();
-    void stop();
+    void cleanup();
     
     bool is_running() { return running; };
     std::string get_title() { return title; };
@@ -37,6 +38,7 @@ private:
     
     duration_ns game_time = duration_ns{0};
     duration_ms delta_time;
+    
 };
 
 #endif // APP_H

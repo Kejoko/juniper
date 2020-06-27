@@ -26,12 +26,18 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 #======================================================================
-# Include directories and libraries
+# Include Juniper dependencies directories and libraries
 #======================================================================
 include_directories(
-  ${PROJECT_SOURCE_DIR}/juniper
-  ${PROJECT_SOURCE_DIR}/juniper/logger
-  ${PROJECT_SOURCE_DIR}/juniper/world)
+  ${PROJECT_SOURCE_DIR}/juniper/dependencies)
+
+#======================================================================
+# Include Juniper directories and libraries
+#======================================================================
+include_directories(
+  ${PROJECT_SOURCE_DIR}/juniper/src
+  ${PROJECT_SOURCE_DIR}/juniper/src/logger
+  ${PROJECT_SOURCE_DIR}/juniper/src/world)
 
 list(APPEND J_LIBS J_App)
 list(APPEND J_LIBS J_Logger)
@@ -49,6 +55,6 @@ add_subdirectory(juniper)
 add_executable(JuniperApp Entry.cpp)
 
 target_link_libraries(
-  JuniperApp 
+  JuniperApp
   PRIVATE
   ${J_LIBS})

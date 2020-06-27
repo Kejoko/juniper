@@ -8,10 +8,14 @@
 
 #include <chrono>
 #include <string>
+#include <thread>
 
+#include <Core.h>
 #include <Logger.h>
 
 #include "App.h"
+
+std::thread log_thread;
 
 App::App(std::string _title, int ms_timestep) {
     title = _title;
@@ -19,9 +23,7 @@ App::App(std::string _title, int ms_timestep) {
 }
 
 void App::init() {
-    Logger::info("Initializing " + title);
     running = true;
-    Logger::info("Initialized " + title);
 }
 
 
@@ -50,17 +52,16 @@ void App::run() {
     duration_ns elapsed_tick_time;
     duration_ns accumulator = duration_ns{0};
     
-    // Previous state
-    // Current state
-    // Next state
+    // Previous state declaration
+    // Current state declaration
+    // Next state declaration
     
     long double alpha;
     
-    Logger::info("Starting " + title);
     while(running) {
         current_tick_start = highres_clock::now();
         elapsed_tick_time = current_tick_start - previous_tick_start;
-        // If elapsed tick time was too long, lock it
+        // Clamp tick time if too long
         previous_tick_start = current_tick_start;
         
         accumulator += elapsed_tick_time;
@@ -74,7 +75,7 @@ void App::run() {
             accumulator -= delta_time;
         }
         
-        alpha = (accumulator.count() / delta_time.count()) / 1000000.0;
+        alpha = (accumulator.count() / delta_time.count()) / + 1000000.0;
         
         // Update current state by interpolating between previous and next state
         // current state  =  next_state * alpha  +  prev_state * (1 - alpha)
@@ -82,9 +83,9 @@ void App::run() {
         // Render current state
     }
     
-    Logger::warn("Stopped " + title);
+    cleanup();
 }
 
-void App::stop() {
+void App::cleanup() {
     
 }

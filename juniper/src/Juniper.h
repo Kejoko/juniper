@@ -9,6 +9,7 @@
 #ifndef JUNIPER_H
 #define JUNIPER_H
 
+#include "Core.h"
 #include "App.h"
 
 #include "logger/Logger.h"
