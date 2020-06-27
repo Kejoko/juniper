@@ -10,17 +10,19 @@
 #ifndef CHUNK_H
 #define CHUNK_H
 
-#include <vector>
-
 //  Store terrain and game-object/world-asset information
 
-class Chunk {
-public:
-    Chunk(int _id, int _x, int _y);
-private:
-    int id;
-    int x;
-    int y;
-};
+namespace Juniper {
+
+    class Chunk {
+    public:
+        Chunk(int _id, int _x, int _y);
+    private:
+        int id;
+        int x;
+        int y;
+    };
+
+}
 
 #endif // CHUNK_H

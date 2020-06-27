@@ -17,13 +17,17 @@
 #include <spdlog/async.h>
 #include <spdlog/spdlog.h>
 
-class Logger {
-public:
-    static void init(std::string title);
-    static void cleanup();
-private:
-    static std::shared_ptr<spdlog::async_logger> juniper_logger;
-};
+namespace Juniper {
+
+    class Logger {
+    public:
+        static void init(std::string title);
+        static void cleanup();
+    private:
+        static std::shared_ptr<spdlog::async_logger> juniper_logger;
+    };
+
+}
 
 #define JUNIPER_TRACE(...) SPDLOG_TRACE(__VA_ARGS__)
 #define JUNIPER_INFO(...) SPDLOG_INFO(__VA_ARGS__)

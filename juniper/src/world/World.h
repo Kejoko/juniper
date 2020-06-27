@@ -15,15 +15,19 @@
 
 #include <Level.h>
 
-class World {
-public:
-    World(std::string _name);
-    
-    std::vector<Level> levels;
-    
-    std::string get_name();
-private:
-    std::string name;
-};
+namespace Juniper {
+
+    class World {
+    public:
+        World(std::string _name);
+        
+        std::vector<Level> levels;
+        
+        std::string get_name();
+    private:
+        std::string name;
+    };
+
+}
 
 #endif // WORLD_H

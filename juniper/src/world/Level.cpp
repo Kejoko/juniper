@@ -12,6 +12,10 @@
 
 #include "Level.h"
 
-Level::Level(std::string _name) {
-    name = _name;
+namespace Juniper {
+
+    Level::Level(std::string _name) {
+        name = _name;
+    }
+
 }
