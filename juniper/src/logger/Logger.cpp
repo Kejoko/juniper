@@ -25,17 +25,19 @@ std::shared_ptr<spdlog::async_logger> Logger::juniper_logger;
 void Logger::init(std::string title) {
     
     std::vector<spdlog::sink_ptr> sinks;
-    sinks.emplace_back(std::make_shared<spdlog::sinks::stdout_color_sink_mt>());
     sinks.emplace_back(std::make_shared<spdlog::sinks::basic_file_sink_mt>(title + "-log.txt", true));
+    sinks[0]->set_pattern("[%D %T.%f%z] [%l]\t[%s|%!|%#] %v");
+    sinks[0]->set_level(spdlog::level::info);
     
-    sinks[0]->set_pattern("[%T.%F] [%^%s | %! | %#%$] %v");
-    sinks[1]->set_pattern("[%D %T.%f%z] [%l] [%s|%!|%#] %v");
+    #ifdef DEBUG
+    sinks.emplace_back(std::make_shared<spdlog::sinks::stdout_color_sink_mt>());
+    sinks[1]->set_pattern("[%T.%F] [%^%s | %! | %#%$] %v");
+    sinks[1]->set_level(spdlog::level::trace);
+    #endif // DEBUG
     
-    spdlog::init_thread_pool(512, 1);
-    
+    spdlog::init_thread_pool(10000, 1);
     juniper_logger = std::make_shared<spdlog::async_logger>("Juniper", sinks.begin(), sinks.end(), spdlog::thread_pool(), spdlog::async_overflow_policy::overrun_oldest);
     spdlog::register_logger(juniper_logger);
-    juniper_logger->set_level(spdlog::level::trace);
     juniper_logger->flush_on(spdlog::level::trace);
     
     spdlog::set_default_logger(juniper_logger);

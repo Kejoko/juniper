@@ -58,8 +58,7 @@ void App::run() {
     
     long double alpha;
     
-    int count = 0;
-    while(running && count < 1000000) {
+    while(running) {
         current_tick_start = highres_clock::now();
         elapsed_tick_time = current_tick_start - previous_tick_start;
         // Clamp tick time if too long
@@ -74,8 +73,7 @@ void App::run() {
             // Determine next state (physics and game world behavior, etc...)
             game_time += delta_time;
             accumulator -= delta_time;
-            JUNIPER_INFO("Testing logging " + std::to_string(count));
-            //APP_INFO("Testing logging " + std::to_string(count));
+            JUNIPER_INFO("Information");
         }
         
         alpha = (accumulator.count() / delta_time.count()) / + 1000000.0;
@@ -84,8 +82,6 @@ void App::run() {
         // current state  =  next_state * alpha  +  prev_state * (1 - alpha)
         
         // Render current state
-        
-        count++;
     }
     
     cleanup();

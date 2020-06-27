@@ -30,6 +30,5 @@ private:
 #define JUNIPER_WARN(...) SPDLOG_WARN(__VA_ARGS__)
 #define JUNIPER_ERROR(...) SPDLOG_ERROR(__VA_ARGS__)
 #define JUNIPER_CRITICAL(...) SPDLOG_CRITICAL(__VA_ARGS__)
-#define JUNIPER_FATAL(...) SPDLOG_FATAL(__VA_ARGS__)
 
 #endif // LOGGER_H
