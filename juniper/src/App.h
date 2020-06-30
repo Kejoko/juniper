@@ -29,7 +29,7 @@ namespace Juniper {
         App(std::string _title, int ticks_per_second);
         
         void init();
-        void run();
+        int run();
         void cleanup();
         
         bool is_running() { return running; };

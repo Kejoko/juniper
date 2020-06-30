@@ -12,12 +12,15 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 # Preprocessor directives
 #======================================================================
 option(DEBUG_MODE "Debug mode" ON)
+option(RELEASE_MODE "Release mode" OFF)
 if(DEBUG_MODE)
   add_compile_definitions(DEBUG)
 else()
+  option(RELEASE_MODE "Release mode" ON)
   add_compile_definitions(RELEASE)
 endif(DEBUG_MODE)
 unset(DEBUG_MODE CACHE)
+unset(RELEASE_MODE CACHE)
 
 #======================================================================
 # C++ 11 Support
@@ -30,6 +33,18 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #======================================================================
 include_directories(
   ${PROJECT_SOURCE_DIR}/juniper/dependencies)
+
+if(APPLE)
+  include_directories(${PROJECT_SOURCE_DIR}/juniper/dependencies/glfw/mac/include)
+  link_directories(${PROJECT_SOURCE_DIR}/juniper/dependencies/glfw/mac/lib-macos)
+  list(APPEND DEP_LIBS libglfw.3.dylib)
+endif()
+
+if(WIN32)
+  include_directories(${PROJECT_SOURCE_DIR}/juniper/dependencies/glfw/windows/include)
+  link_directories(${PROJECT_SOURCE_DIR}/juniper/dependencies/glfw/windows/lib-vc2019)
+  list(APPEND DEP_LIBS glfw3.dll)
+endif()
 
 #======================================================================
 # Include Juniper directories and libraries
@@ -57,4 +72,5 @@ add_executable(JuniperApp Entry.cpp)
 target_link_libraries(
   JuniperApp
   PRIVATE
+  ${DEP_LIBS}
   ${J_LIBS})

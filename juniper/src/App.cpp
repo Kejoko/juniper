@@ -11,6 +11,9 @@
 #include <thread>
 
 #include <Core.h>
+
+#include <GLFW/glfw3.h>
+
 #include <Logger.h>
 
 #include "App.h"
@@ -43,7 +46,7 @@ namespace Juniper {
     // App.h has some handy typedefs which provide highres_clock, time_point, duration_ns,
     // and duration_ms. Each type is defined as something from the chrono library.
     //------------------------------------------------------------------------------------------
-    void App::run() {
+    int App::run() {
         init();
         
         time_point previous_tick_start = highres_clock::now();
@@ -58,7 +61,22 @@ namespace Juniper {
         
         long double alpha;
         
-        while(running) {
+        GLFWwindow* window;
+        
+        if (!glfwInit()) {
+            JUNIPER_CRITICAL("Failed to initialize glfw");
+            return -1;
+        }
+        
+        window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
+        if (!window) {
+            glfwTerminate();
+            return -1;
+        }
+        
+        glfwMakeContextCurrent(window);
+        
+        while(running && !glfwWindowShouldClose(window)) {
             current_tick_start = highres_clock::now();
             elapsed_tick_time = current_tick_start - previous_tick_start;
             // Clamp tick time if too long
@@ -80,10 +98,15 @@ namespace Juniper {
             // Update current state by interpolating between previous and next state
             // current state  =  next_state * alpha  +  prev_state * (1 - alpha)
             
-            // Render current state
+            // Render current stateglClear
+            (GL_COLOR_BUFFER_BIT);
+            glfwSwapBuffers(window);
+            glfwPollEvents();
         }
         
+        glfwTerminate();
         cleanup();
+        return 0;
     }
 
     void App::cleanup() {
