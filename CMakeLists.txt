@@ -8,7 +8,9 @@ project(Juniper VERSION 0.1 LANGUAGES CXX)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-SET(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic -Werror -Wfatal-errors")
+If (UNIX)
+  SET(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic -Werror -Wfatal-errors")
+endif()
 
 #======================================================================
 # Preprocessor directives
