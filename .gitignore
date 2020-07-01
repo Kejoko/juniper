@@ -19,12 +19,8 @@ cmake_install.cmake
 *.o
 *.obj
 *.so
-*.dylib
-*.dll
 *.lai
 *.la
-*.a
-*.lib
 *.exe
 *.out
 *.app
