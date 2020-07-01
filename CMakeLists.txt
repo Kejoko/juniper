@@ -41,9 +41,15 @@ if(APPLE)
 endif()
 
 if(WIN32)
-  include_directories(${PROJECT_SOURCE_DIR}/juniper/dependencies/glfw/windows/include)
-  link_directories(${PROJECT_SOURCE_DIR}/juniper/dependencies/glfw/windows/lib-vc2019)
-  list(APPEND DEP_LIBS glfw3.dll)
+  if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+	include_directories(${PROJECT_SOURCE_DIR}/juniper/dependencies/glfw/windows64/include)
+	link_directories(${PROJECT_SOURCE_DIR}/juniper/dependencies/glfw/windows64/lib-vc2019)
+	list(APPEND DEP_LIBS glfw3.dll)
+  else()
+    include_directories(${PROJECT_SOURCE_DIR}/juniper/dependencies/glfw/windows32/include)
+	link_directories(${PROJECT_SOURCE_DIR}/juniper/dependencies/glfw/windows32/lib-vc2019)
+	list(APPEND DEP_LIBS glfw3.dll)
+  endif()
 endif()
 
 #======================================================================

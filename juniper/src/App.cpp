@@ -100,7 +100,7 @@ namespace Juniper {
             
             // Render current stateglClear
             (GL_COLOR_BUFFER_BIT);
-            //glfwSwapBuffers(window);
+            glfwSwapBuffers(window);
             glfwPollEvents();
         }
         
