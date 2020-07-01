@@ -32,25 +32,33 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Include Juniper dependencies directories and libraries
 #======================================================================
 include_directories(
-  ${PROJECT_SOURCE_DIR}/juniper/dependencies)
+  ${PROJECT_SOURCE_DIR}/juniper/dependencies
+  ${PROJECT_SOURCE_DIR}/juniper/dependencies/glfw/include)
 
-if(APPLE)
-  include_directories(${PROJECT_SOURCE_DIR}/juniper/dependencies/glfw/mac/include)
-  link_directories(${PROJECT_SOURCE_DIR}/juniper/dependencies/glfw/mac/lib-macos)
-  list(APPEND DEP_LIBS libglfw.3.dylib)
+list(APPEND DEP_LIBS glfw)
+
+if (APPLE)
+  list(APPEND DEP_LIBS "-framework OpenGL")
 endif()
 
-if(WIN32)
-  if(CMAKE_SIZEOF_VOID_P EQUAL 8)
-	include_directories(${PROJECT_SOURCE_DIR}/juniper/dependencies/glfw/windows64/include)
-	link_directories(${PROJECT_SOURCE_DIR}/juniper/dependencies/glfw/windows64/lib-vc2019)
-	list(APPEND DEP_LIBS glfw3.dll)
-  else()
-    include_directories(${PROJECT_SOURCE_DIR}/juniper/dependencies/glfw/windows32/include)
-	link_directories(${PROJECT_SOURCE_DIR}/juniper/dependencies/glfw/windows32/lib-vc2019)
-	list(APPEND DEP_LIBS glfw3.dll)
-  endif()
-endif()
+
+#if(APPLE)
+#  include_directories(${PROJECT_SOURCE_DIR}/juniper/dependencies/glfw/mac/include)
+#  link_directories(${PROJECT_SOURCE_DIR}/juniper/dependencies/glfw/mac/lib-macos)
+#  list(APPEND DEP_LIBS libglfw.3.dylib)
+#endif()
+
+#if(WIN32)
+#  if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+#	include_directories(${PROJECT_SOURCE_DIR}/juniper/dependencies/glfw/windows64/include)
+#	link_directories(${PROJECT_SOURCE_DIR}/juniper/dependencies/glfw/windows64/lib-vc2019)
+#	list(APPEND DEP_LIBS glfw3.dll)
+#  else()
+#    include_directories(${PROJECT_SOURCE_DIR}/juniper/dependencies/glfw/windows32/include)
+#	link_directories(${PROJECT_SOURCE_DIR}/juniper/dependencies/glfw/windows32/lib-vc2019)
+#	list(APPEND DEP_LIBS glfw3.dll)
+#  endif()
+#endif()
 
 #======================================================================
 # Include Juniper directories and libraries

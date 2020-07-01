@@ -98,8 +98,8 @@ namespace Juniper {
             // Update current state by interpolating between previous and next state
             // current state  =  next_state * alpha  +  prev_state * (1 - alpha)
             
-            // Render current stateglClear
-            (GL_COLOR_BUFFER_BIT);
+            // Render current state
+            glClear(GL_COLOR_BUFFER_BIT);
             glfwSwapBuffers(window);
             glfwPollEvents();
         }
