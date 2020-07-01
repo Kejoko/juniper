@@ -40,5 +40,9 @@
 #define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_INFO
 #endif // RELEASE
 
+//------------------------------------------------------------------------------------------
+// OpenGL macros
+//------------------------------------------------------------------------------------------
+#define GL_SILENCE_DEPRECATION
 
 #endif // CORE_H
