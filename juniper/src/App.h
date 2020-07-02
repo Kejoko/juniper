@@ -13,6 +13,10 @@
 #include <string>
 #include <thread>
 
+#include <Core.h>
+
+#include <GLFW/glfw3.h>
+
 #include <World.h>
 
 typedef std::chrono::high_resolution_clock highres_clock;
@@ -24,23 +28,28 @@ namespace Juniper {
 
     class App {
     public:
-        World* world;
-        
         App(std::string _title, int ticks_per_second);
-        
-        void init();
-        int run();
-        void cleanup();
-        
-        bool is_running() { return running; };
+
+        bool init();
+        bool run();
+        bool cleanup();
+
+        bool should_run() { return running && !glfwWindowShouldClose(game_window); };
+
         std::string get_title() { return title; };
+        bool is_running() { return running; };
+        GLFWwindow* get_game_window() { return game_window;  };
     private:
-        bool running = false;
         std::string title;
-        
+
+        bool running = false;
+
         duration_ns game_time = duration_ns{0};
         duration_ms delta_time;
         
+        GLFWwindow* game_window;
+
+        World* world;
     };
 
 }

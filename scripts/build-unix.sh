@@ -10,7 +10,7 @@ fi
 
 # Ensure make is installed
 
-echo "... Building Juniper application ..."
+echo "... Building Juniper Engine ..."
 
 # Create build directory
 if [ ! -d build ]
@@ -22,7 +22,7 @@ else
 fi
 cd build
 
-# CMake and make to build the Juniper application
+# CMake and make to build Juniper Engine
 {
   echo "... Running CMake ..."
   cmake ..
@@ -39,7 +39,7 @@ cd build
 }
 
 cd ..
-mv build/JuniperApp .
+mv build/JuniperEngine .
 
-echo "... Successfully built Juniper application ..."
+echo "... Successfully built Juniper Engine ..."
 exit 0

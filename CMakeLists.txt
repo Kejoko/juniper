@@ -83,10 +83,10 @@ add_subdirectory(juniper)
 #======================================================================
 # Entry Point
 #======================================================================
-add_executable(JuniperApp Entry.cpp)
+add_executable(JuniperEngine Entry.cpp)
 
 target_link_libraries(
-  JuniperApp
+  JuniperEngine
   PRIVATE
   ${DEP_LIBS}
   ${J_LIBS})

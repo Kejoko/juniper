@@ -25,8 +25,25 @@ namespace Juniper {
         delta_time = duration_ms{ms_timestep};
     }
 
-    void App::init() {
+    bool App::init() {
+        if (!glfwInit()) {
+            JUNIPER_CRITICAL("Failed to initialize glfw");
+            return false;
+        }
+        
+        game_window = glfwCreateWindow(640, 480, title.c_str(), NULL, NULL);
+
+        if (!game_window) {
+            JUNIPER_CRITICAL("Failed to create game_window");
+            glfwTerminate();
+            return false;
+        }
+        
+        glfwMakeContextCurrent(game_window);
+
         running = true;
+
+        return true;
     }
 
 
@@ -46,8 +63,9 @@ namespace Juniper {
     // App.h has some handy typedefs which provide highres_clock, time_point, duration_ns,
     // and duration_ms. Each type is defined as something from the chrono library.
     //------------------------------------------------------------------------------------------
-    int App::run() {
-        init();
+    bool App::run() {
+        if (!init())
+            return false;
         
         time_point previous_tick_start = highres_clock::now();
         time_point current_tick_start;
@@ -61,22 +79,7 @@ namespace Juniper {
         
         long double alpha;
         
-        GLFWwindow* window;
-        
-        if (!glfwInit()) {
-            JUNIPER_CRITICAL("Failed to initialize glfw");
-            return -1;
-        }
-        
-        window = glfwCreateWindow(640, 480, title.c_str(), NULL, NULL);
-        if (!window) {
-            glfwTerminate();
-            return -1;
-        }
-        
-        glfwMakeContextCurrent(window);
-        
-        while(running && !glfwWindowShouldClose(window)) {
+        while(should_run()) {
             current_tick_start = highres_clock::now();
             elapsed_tick_time = current_tick_start - previous_tick_start;
             // Clamp tick time if too long
@@ -100,17 +103,24 @@ namespace Juniper {
             
             // Render current state
             glClear(GL_COLOR_BUFFER_BIT);
-            glfwSwapBuffers(window);
+            glfwSwapBuffers(game_window);
             glfwPollEvents();
         }
         
-        glfwTerminate();
-        cleanup();
-        return 0;
+        if (!cleanup())
+            return false;
+        
+        return true;
     }
 
-    void App::cleanup() {
-        
+    bool App::cleanup() {
+        running = false;
+
+        glfwTerminate();
+
+        Logger::cleanup();
+
+        return true;
     }
 
 }
