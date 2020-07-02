@@ -12,6 +12,11 @@ If (UNIX)
   SET(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic -Werror -Wfatal-errors")
 endif()
 
+# To get rid of linking warning on windows
+if(MSVC)
+  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:msvcrt.lib")
+endif()
+
 #======================================================================
 # Preprocessor directives
 #======================================================================
@@ -49,12 +54,12 @@ if(WIN32)
   if(CMAKE_SIZEOF_VOID_P EQUAL 8)
 	include_directories(${PROJECT_SOURCE_DIR}/juniper/dependencies/glfw/windows64/include)
 	link_directories(${PROJECT_SOURCE_DIR}/juniper/dependencies/glfw/windows64/lib-vc2019)
-	list(APPEND DEP_LIBS glfw3.dll)
   else()
     include_directories(${PROJECT_SOURCE_DIR}/juniper/dependencies/glfw/windows32/include)
 	link_directories(${PROJECT_SOURCE_DIR}/juniper/dependencies/glfw/windows32/lib-vc2019)
-	list(APPEND DEP_LIBS glfw3.dll)
   endif()
+  list(APPEND DEP_LIBS glfw3.dll)
+  list(APPEND DEP_LIBS opengl32.lib)
 endif()
 
 #======================================================================
